@@ -1,61 +1,272 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Product example · Bootstrap</title>
 
-</head>
-<body>
-    <button onclick="getUsuarios()">Procurar</button>
-    <table id="tabelaUsuarios">
-        <thead>
-            <tr>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <meta name="theme-color" content="#563d7c" />
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="css/product.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+      <div
+        class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden"
+      >
+        <div class="my-3 py-3 text-center">
+          <h2 class="display-5">Lista de Usuarios</h2>
+          <br />
+          <button onclick="getUsuarios()">Procurar Usuarios</button>
+          <br /><br />
+          <table id="tabelaUsuarios" class="text-white text-center mx-auto">
+            <thead>
+              <tr>
                 <td>Código</td>
                 <td>Nome</td>
                 <td>E-mail</td>
                 <td>Login</td>
-            </tr>
-        </thead>
-        <tbody  id="listaUsuarios">
+              </tr>
+            </thead>
+            <tbody id="listaUsuarios"></tbody>
+          </table>
+        </div>
+      </div>
 
-        </tbody>
-    </table>
+      <div
+        class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden"
+      >
+        <div class="my-3 p-3">
+          <h2 class="display-5">Cadastrar Usuarios</h2>
+          <form action="" onsubmit="return validarUsuario('add')" method="post">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nome">Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nome"
+                  name="nome"
+                  placeholder=""
+                  value=""
+                  required=""
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="email">Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder=""
+                  value=""
+                  required=""
+                />
+              </div>
+            </div>
 
-    <hr>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="login">Login</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="login"
+                  name="login"
+                  placeholder=""
+                  value=""
+                  required=""
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="senha">Senha</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="senha"
+                  name="senha"
+                  placeholder=""
+                  value=""
+                  required=""
+                />
+              </div>
+            </div>
 
-    <form action="" onsubmit="return validarUsuario('add')" method="post">
-        <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome">
+            <div class="row">
+              <div class="col-md-12 mb-6">
+                <label for="validarSenha">Validar Senha</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  name="validarSenha"
+                  id="validarSenha"
+                />
+              </div>
+            </div>
 
-        <br><br>
+            <br /><br />
 
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email">
-        
-        <br><br>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+              Salvar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
 
-        <label for="login">Login</label>
-        <input type="text" name="login" id="login">
-        
-        <br><br>
+    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+      <div
+        class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden"
+      >
+        <div class="my-3 p-3">
+          <h2 class="display-5">Alterar Usuarios</h2>
+          <form action="" onsubmit="return alterar()" method="post">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nomeU">Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nomeU"
+                  name="nomeU"
+                  placeholder=""
+                  value=""
+                  required=""
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="emailU">Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="emailU"
+                  name="emailU"
+                  placeholder=""
+                  value=""
+                  required=""
+                />
+              </div>
+            </div>
 
-        <label for="senha">Senha</label>
-        <input type="password" name="senha" id="senha">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="loginU">Login</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="loginU"
+                  name="loginU"
+                  placeholder=""
+                  value=""
+                  required=""
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="senhaU">Senha</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="senhaU"
+                  name="senhaU"
+                  placeholder=""
+                  value=""
+                  required=""
+                />
+              </div>
+            </div>
 
-        <br><br>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="validarSenhaU">Validar Senha</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  name="validarSenhaU"
+                  id="validarSenhaU"
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="codUpdate">Codigo Selecionado</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="codUpdate"
+                  id="codUpdate"
+                />
+              </div>
+            </div>
 
-        <label for="validarSenha">Validar Senha</label>
-        <input type="password" name="validarSenha" id="validarSenha">
+            <br /><br />
 
-        <br><br>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+              Salvar
+            </button>
+          </form>
+        </div>
+      </div>
+      <div
+        class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden"
+      >
+        <div class="my-3 p-3">
+          <h2 class="display-5">Deletar Usuarios</h2>
+          <form action="" onsubmit="return remove()" method="post">
+            <div class="row">
+              <div class="col-md-12 mb-6">
+                <label for="codDelete">Codigo Selecionado</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="codDelete"
+                  id="codDelete"
+                />
+              </div>
+            </div>
 
-        <button type="submit">Salvar</button>
-    </form>
+            <br /><br />
 
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+              Salvar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
 
-
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>',
+        );
+    </script>
     <script src="js/UsuarioApi.js"></script>
     <script src="js/UsuarioView.js"></script>
-</body>
+  </body>
 </html>

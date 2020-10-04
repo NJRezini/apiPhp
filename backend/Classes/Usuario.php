@@ -14,8 +14,8 @@ class Usuario {
     }
     
     public function listar() {
-        
-        $sql = "select * from usuario;";       
+
+        $sql = "select * from usuario;"; 
         $q = $this->conexao->prepare($sql);
         $q->execute();
         return $q;
@@ -33,6 +33,34 @@ class Usuario {
         $q->bindParam(2, $email);
         $q->bindParam(3, $login);
         $q->bindParam(4, $senha);
+        
+        $q->execute();
+        
+    }
+
+    public function alterar($codigo, $nome, $email, $login, $senha) {
+        
+        $sql = "update usuario set nome = ?, email = ?, login = ?, senha = ? where codigo = ?;";
+        $q = $this->conexao->prepare($sql);
+
+        $senha = md5($senha);
+        
+        $q->bindParam(1, $nome);
+        $q->bindParam(2, $email);
+        $q->bindParam(3, $login);
+        $q->bindParam(4, $senha);
+        $q->bindParam(5, $codigo);
+        
+        $q->execute();
+        
+    }
+
+    public function deletar($codigo) {
+        
+        $sql = "delete from usuario where codigo = ?;";
+        $q = $this->conexao->prepare($sql);
+
+        $q->bindParam(1, $codigo);
         
         $q->execute();
         

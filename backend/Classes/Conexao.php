@@ -3,13 +3,13 @@
 namespace Classes;
 
 class Conexao {
-
     public static function getConexao() {
-
-        $caminhoDoArquivo = "sqlite/site.db";
-        $con = new \PDO("sqlite:" . $caminhoDoArquivo);
-
+        try {
+            $con = new \PDO("sqlite:sqlite/site.db");
+        } catch (PDOException $e) {
+            echo 'Connection failed: ' . $e->getMessage();
+        }
+        
         return $con;
     }
-
 }

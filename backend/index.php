@@ -8,8 +8,11 @@ use Classes\Usuario;
 /* API RESTFul em PHP puro */
 
 //Informa para o cliente que será retornado JSON
-header('Access-Control-Allow-Origin: *');
 header('Content-type: application/json');
+header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Max-Age: 86400');
+header('Access-Control-Allow-Methods: *');
 
 //Captura os parâmetros
 $param = filter_input_array(INPUT_GET, FILTER_DEFAULT);
@@ -50,8 +53,21 @@ if ($method == "GET") {
     echo json_encode($usuario);
     
 } else if ($method == "PUT") {
-    
+
+    $usuario = json_decode($body);
+    $usu = new Usuario();    
+    $usu->alterar($usuario->cod, $usuario->nome, $usuario->email, $usuario->login, $usuario->senha);
+
+    echo json_encode($usuario);
+
+
 } else if ($method == "DELETE") {
-    
+
+    $obj = json_decode($body);
+
+    $usu = new Usuario();    
+    $usu->deletar($obj->cod);
+
+    echo json_encode($cod);
 }
 ?>
